@@ -9,6 +9,8 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
+import android.view.Gravity
+import android.view.View
 import android.view.accessibility.AccessibilityManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -47,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             text = "🎬 屏幕宏录制器"
             textSize = 26f
             setTextColor(android.graphics.Color.WHITE)
-            textStyle = android.graphics.Typeface.BOLD
+            setTypeface(null, android.graphics.Typeface.BOLD)
             gravity = Gravity.CENTER
             mainLayout.addView(this)
         }
@@ -295,7 +297,7 @@ class MainActivity : AppCompatActivity() {
             this.text = text
             textSize = 18f
             setTextColor(android.graphics.Color.WHITE)
-            textStyle = android.graphics.Typeface.BOLD
+            setTypeface(null, android.graphics.Typeface.BOLD)
             setPadding(0, 8, 0, 4)
         })
     }

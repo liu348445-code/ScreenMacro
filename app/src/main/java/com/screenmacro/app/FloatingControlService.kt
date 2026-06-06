@@ -6,9 +6,9 @@ import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.Build
 import android.os.IBinder
+import android.util.*
 import android.view.*
 import android.widget.*
-import kotlinx.coroutines.flow.first
 
 /**
  * 悬浮控制面板服务
@@ -60,7 +60,7 @@ class FloatingControlService : Service() {
     override fun onDestroy() {
         hideFloatingButton()
         hideControlPanel()
-        if (touchRecorder.isRecording.first()) {
+        if (touchRecorder.isRecording.value) {
             touchRecorder.stopRecording()
         }
         isRunning = false
@@ -184,7 +184,7 @@ class FloatingControlService : Service() {
         // ---- 录制按钮 ----
         val recordBtn = createButton("🎬  开始录制", android.graphics.Color.parseColor("#FFE53935"))
         recordBtn.setOnClickListener {
-            if (!touchRecorder.isRecording.first()) {
+            if (!touchRecorder.isRecording.value) {
                 touchRecorder.startRecording()
                 recordBtn.text = "🔴  停止录制"
                 recordBtn.setBackgroundColor(android.graphics.Color.parseColor("#FF1E88E5"))

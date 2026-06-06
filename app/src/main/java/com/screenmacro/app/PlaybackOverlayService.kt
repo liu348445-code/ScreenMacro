@@ -27,6 +27,10 @@ class PlaybackOverlayService : Service() {
             private set
 
         var currentVideoPath: String? = null
+
+        const val ACTION_SHOW = "com.screenmacro.SHOW_PLAYBACK"
+        const val ACTION_HIDE = "com.screenmacro.HIDE_PLAYBACK"
+        const val EXTRA_VIDEO_PATH = "video_path"
     }
 
     private lateinit var windowManager: WindowManager
@@ -229,9 +233,4 @@ class PlaybackOverlayService : Service() {
             .build()
     }
 
-    companion object {
-        const val ACTION_SHOW = "com.screenmacro.SHOW_PLAYBACK"
-        const val ACTION_HIDE = "com.screenmacro.HIDE_PLAYBACK"
-        const val EXTRA_VIDEO_PATH = "video_path"
-    }
 }
