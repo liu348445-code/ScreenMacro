@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">屏幕宏录制器</string>
+    <string name="accessibility_desc">用于回放录制的触摸操作，模拟点击和滑动</string>
+</resources>

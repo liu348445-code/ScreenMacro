@@ -1,0 +1,19 @@
+# 忽略构建输出
+/build
+/app/build
+/.gradle
+/local.properties
+
+# IDE 文件
+.idea/
+*.iml
+.DS_Store
+
+# 原生库
+*.so
+
+# 日志
+*.log
+
+# 操作系统文件
+Thumbs.db
