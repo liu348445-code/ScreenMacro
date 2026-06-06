@@ -36,7 +36,7 @@ class PlaybackOverlayService : Service() {
     private lateinit var windowManager: WindowManager
     private var overlayView: View? = null
     private var mediaPlayer: MediaPlayer? = null
-    private var isPlaying = false
+    private var playbackActive = false
 
     override fun onCreate() {
         super.onCreate()
@@ -89,7 +89,7 @@ class PlaybackOverlayService : Service() {
                 mediaPlayer = mp
                 mp.setLooping(true)
                 mp.start()
-                this.isPlaying = true
+                this.playbackActive = true
             }
             setOnErrorListener { _, _, _ ->
                 Toast.makeText(this@PlaybackOverlayService, "视频播放失败", Toast.LENGTH_SHORT).show()
@@ -179,11 +179,11 @@ class PlaybackOverlayService : Service() {
 
     private fun hideOverlay() {
         mediaPlayer?.apply {
-            if (isPlaying) stop()
+            if (playbackActive) stop()
             release()
         }
         mediaPlayer = null
-        isPlaying = false
+        playbackActive = false
 
         overlayView?.let {
             try { windowManager.removeView(it) } catch (_: Exception) {}
@@ -195,12 +195,12 @@ class PlaybackOverlayService : Service() {
 
     private fun togglePlayback() {
         mediaPlayer?.let { mp ->
-            if (mp.isPlaying) {
+            if (mp.playbackActive) {
                 mp.pause()
-                isPlaying = false
+                playbackActive = false
             } else {
                 mp.start()
-                isPlaying = true
+                playbackActive = true
             }
         }
     }
