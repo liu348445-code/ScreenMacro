@@ -153,7 +153,7 @@ class TouchRecorder(private val context: Context) {
             x = event.x / screenW,
             y = event.y / screenH,
             eventTimeMs = offsetMs,
-            pointerId = event.pointerId,
+            pointerId = event.getPointerId(event.actionIndex),
             pressure = event.pressure
         )
 

@@ -33,6 +33,9 @@ class ScreenRecordService : Service() {
         private const val NOTIFICATION_ID = 1001
         private const val CHANNEL_ID = "screen_record_channel"
 
+        const val ACTION_START = "com.screenmacro.START_RECORDING"
+        const val ACTION_STOP = "com.screenmacro.STOP_RECORDING"
+
         /** 录制状态 */
         var isRecording = false
             private set
@@ -49,7 +52,7 @@ class ScreenRecordService : Service() {
          * 初始化 MediaProjection（从 MainActivity 的结果获取）
          */
         fun setupProjection(context: Context, data: Intent, resultCode: Int) {
-            val mgr = context.getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+            val mgr = context.getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
             mediaProjection = mgr.getMediaProjection(resultCode, data)
         }
 
@@ -130,16 +133,12 @@ class ScreenRecordService : Service() {
             }
 
             val surface = recorder.surface
-            projection.createCapturedContentIntent(
-                DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR
-            ).also { displayIntent ->
-                projection.createVirtualDisplay(
-                    "ScreenMacroRecord",
-                    width, height, density,
-                    android.hardware.display.DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
-                    surface, null, null
-                )
-            }
+            projection.createVirtualDisplay(
+                "ScreenMacroRecord",
+                width, height, density,
+                DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
+                surface, null, null
+            )
 
             mediaRecorder = recorder
             recorder.start()
@@ -222,8 +221,4 @@ class ScreenRecordService : Service() {
             .build()
     }
 
-    companion object {
-        const val ACTION_START = "com.screenmacro.START_RECORDING"
-        const val ACTION_STOP = "com.screenmacro.STOP_RECORDING"
-    }
 }

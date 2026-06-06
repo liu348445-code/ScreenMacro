@@ -87,7 +87,7 @@ class PlaybackOverlayService : Service() {
             setVideoPath(videoPath)
             setOnPreparedListener { mp ->
                 mediaPlayer = mp
-                mp.isLooping = true
+                mp.setLooping(true)
                 mp.start()
                 isPlaying = true
             }

@@ -16,10 +16,10 @@ data class TouchEvent(
  * 一次完整的宏录制
  */
 data class MacroRecording(
-    val name: String = "未命名录制",
-    val timestamp: Long = System.currentTimeMillis(),
-    val screenWidthPx: Int = 0,
-    val screenHeightPx: Int = 0,
+    var name: String = "未命名录制",
+    var timestamp: Long = System.currentTimeMillis(),
+    var screenWidthPx: Int = 0,
+    var screenHeightPx: Int = 0,
     val events: MutableList<TouchEvent> = mutableListOf()
 ) {
     val durationMs: Long
