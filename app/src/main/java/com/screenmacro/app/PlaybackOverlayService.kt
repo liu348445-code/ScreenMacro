@@ -89,7 +89,7 @@ class PlaybackOverlayService : Service() {
                 mediaPlayer = mp
                 mp.setLooping(true)
                 mp.start()
-                isPlaying = true
+                this.isPlaying = true
             }
             setOnErrorListener { _, _, _ ->
                 Toast.makeText(this@PlaybackOverlayService, "视频播放失败", Toast.LENGTH_SHORT).show()
