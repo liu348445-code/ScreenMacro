@@ -89,7 +89,7 @@ class PlaybackOverlayService : Service() {
                 mediaPlayer = mp
                 mp.setLooping(true)
                 mp.start()
-                this.playbackActive = true
+                this@PlaybackOverlayService.playbackActive = true
             }
             setOnErrorListener { _, _, _ ->
                 Toast.makeText(this@PlaybackOverlayService, "视频播放失败", Toast.LENGTH_SHORT).show()
@@ -179,7 +179,7 @@ class PlaybackOverlayService : Service() {
 
     private fun hideOverlay() {
         mediaPlayer?.apply {
-            if (playbackActive) stop()
+            if (this@PlaybackOverlayService.playbackActive) stop()
             release()
         }
         mediaPlayer = null
@@ -195,7 +195,7 @@ class PlaybackOverlayService : Service() {
 
     private fun togglePlayback() {
         mediaPlayer?.let { mp ->
-            if (mp.playbackActive) {
+            if (mp.isPlaying) {
                 mp.pause()
                 playbackActive = false
             } else {
